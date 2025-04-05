@@ -23,8 +23,8 @@ This document outlines the bugs that were identified and fixed in the applicatio
 
 ### 1. Countdown Timer Issue
 **Issue:** Countdown timer interval wasn't being cleaned up, causing memory leaks.  
-**Root Cause:** React components need to clean up resources when unmounting 
-**Solution:** Tdd cleanup function to clear the interval
+**Root Cause:** React components need to clean up resources when unmounting
+**Solution:** Add cleanup function to clear the interval
 
 ### 2. Language Switching Feature
 **Enhancement Request:** Add language switching capability between English and German.  
