@@ -16,15 +16,15 @@ This document outlines the bugs that were identified and fixed in the applicatio
 
 ### 3. User Avatar Display
 **Issue:** User avatar in the app bar was missing although user data being fetched on app start.  
-**Root Cause:** Typo in property name (`urser` instead of `user`) preventing user data from being stored correctly.  
-**Solution:** Fixed the property name typo to correctly store and display user data.
+**Root Cause:** Typo in property name (`urser` instead of `user`) preventing user data from being stored correctly + Material-UI transition components weren't properly structured 
+**Solution:** Fixed the property name typo to correctly store and display user data +  Added loading state + Wrapped components in proper DOM elements
 
 ## Optional Enhancements
 
 ### 1. Countdown Timer Issue
-**Issue:** The countdown in the app header occasionally behaves unexpectedly (intermittent).  
-**Status:** Under investigation - requires reliable reproduction steps.  
-**Note:** This is a hard-to-reproduce issue that needs further investigation.
+**Issue:** Countdown timer interval wasn't being cleaned up, causing memory leaks.  
+**Root Cause:** React components need to clean up resources when unmounting 
+**Solution:** Tdd cleanup function to clear the interval
 
 ### 2. Language Switching Feature
 **Enhancement Request:** Add language switching capability between English and German.  
