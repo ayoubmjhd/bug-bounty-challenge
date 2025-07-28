@@ -5,6 +5,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { useTranslation } from "react-i18next";
+import { createSafeHtmlProps } from "../../utils/security";
 
 const Home = () => {
   const { t } = useTranslation("app");
@@ -52,15 +53,16 @@ const Home = () => {
         </Typography>
 
         {/* 
-        Bold bug
+        Bold bug - SECURITY IMPROVED
         Issue: HTML tags were rendered as plain text --> <b>known</b> wasn't showing as bold
-        Solution: render HTML content with dangerouslySetInnerHTML 
-        Reason: React's default behavior is to escape HTML for security, but in this case, we needed to render the HTML tags
+        Previous Solution: Used dangerouslySetInnerHTML which poses XSS risk
+        New Solution: Use safer HTML rendering that only allows whitelisted tags (<b>, <strong>, etc.)
+        Security: This prevents XSS attacks while still allowing basic formatting
         */}
         <Typography
           variant="subtitle1"
           textAlign="center"
-          dangerouslySetInnerHTML={{ __html: t("home.intro") }}
+          {...createSafeHtmlProps(t("home.intro"))}
         />
         <Typography variant="body2" textAlign="center" color="textSecondary">
           {t("home.sidenote")}

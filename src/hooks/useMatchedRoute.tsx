@@ -83,7 +83,7 @@ const useMatchedRoute = (
       }) => (
         <Slide
           in={match ? true : false}
-          direction={direction as "left" | "right" | "up" | "down"}
+          direction="left"
           timeout={300}
           unmountOnExit
         >
@@ -93,7 +93,7 @@ const useMatchedRoute = (
 
       return SlideTransition;
     }
-    return (({ children }) => children) as React.FC<{ match: any }>;
+    return ({ children }) => children;
   }, [transition]);
 
   return {

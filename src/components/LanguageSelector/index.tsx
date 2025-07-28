@@ -2,6 +2,7 @@ import { Box, Button, Menu, MenuItem } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FALLBACK_LANGUAGE, Language } from "../../i18n/i18n";
+import { validateLanguageCode } from "../../utils/security";
 
 const languages: Language[] = [
   { locale: "en", name: "English", icon: "EN" },
@@ -21,6 +22,19 @@ const LanguageSelector = () => {
   };
 
   const handleLanguageChange = (locale: string) => {
+    // Security: Validate language code to prevent injection attacks
+    if (!validateLanguageCode(locale)) {
+      console.warn(`Invalid language code attempted: ${locale}`);
+      return;
+    }
+    
+    // Additional check: ensure the locale is in our allowed languages list
+    const isValidLanguage = languages.some(lang => lang.locale === locale);
+    if (!isValidLanguage) {
+      console.warn(`Unauthorized language code attempted: ${locale}`);
+      return;
+    }
+    
     i18n.changeLanguage(locale);
     handleClose();
   };

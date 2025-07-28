@@ -15,6 +15,7 @@ import { osapiens } from "./themes";
 import "./i18n";
 import { StoreProvider as UserStoreProvider } from "./api/services/User";
 
+
 const theme = osapiens.light;
 
 const PREFIX = "App";
