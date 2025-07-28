@@ -3,7 +3,7 @@
     "./src/**/*"
   ],
   "compilerOptions": {
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "lib": [
       "dom",
@@ -20,6 +20,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   }
 }

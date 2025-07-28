@@ -22,7 +22,7 @@ export default class UserStore {
 
   // actions
   async getOwnUser() {
-    const [result, error] = (await resultOrError(
+  const response = await resultOrError(
       new Promise((resolve) =>
         setTimeout(
           () =>
@@ -34,13 +34,16 @@ export default class UserStore {
           500
         )
       )
-    )) as ResultOrErrorResponse<User>;
+    );
+    const result = response[0];
+    const error = response[1];
 
     if (!!error) {
-      return {
+      const errorResult = {
         status: ActionResultStatus.ERROR,
-        error,
-      } as ActionError;
+        error: error,
+      };
+      return errorResult;
     }
     {
       /* Avatar display Bug
@@ -54,15 +57,17 @@ export default class UserStore {
         this.user = result;
       });
 
-      return {
+      const successResult = {
         status: ActionResultStatus.SUCCESS,
         result: result,
-      } as ActionSuccess<User>;
+      };
+      return successResult;
     }
 
-    return {
+    const finalErrorResult = {
       status: ActionResultStatus.ERROR,
       error: "Something went wrong.",
-    } as ActionError;
+    };
+    return finalErrorResult;
   }
 }
